@@ -3,8 +3,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { CameraHelper, GridHelper } from "three";
-import { render } from "@react-three/fiber";
-const fs = require("fs");
+
 function loadGLTFModel(scene: any, glbPath: any, options: any) {
   const { receiveShadow, castShadow } = options;
   return new Promise((resolve, reject) => {
@@ -47,7 +46,7 @@ const Dinosaur = () => {
   useEffect(() => {
     const { current: container } = refContainer;
     if (container && !renderer) {
-      const renderer = new THREE.WebGLRenderer({
+      const renderer: any = new THREE.WebGLRenderer({
         antialias: true,
         alpha: true,
       });
@@ -77,7 +76,7 @@ const Dinosaur = () => {
       scene.add(ambientLight);
       const controls = new OrbitControls(camera, renderer.domElement);
       controls.autoRotate = true;
-      console.log(fs);
+
       loadGLTFModel(scene, "/retail-3D-models/P1.glb", {
         receiveShadow: false,
         castShadow: false,
