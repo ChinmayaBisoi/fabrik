@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import MainContent from "../../components/fabrik/main-content";
 
 const Index = () => {
+  const [data, setData] = useState("");
+  useEffect(() => {
+    fetch("/api")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setData(data.message);
+      });
+  }, []);
   return (
     <div className="grid md:grid-cols-12 grid-cols-4 min-h-screen">
       <div className="hidden md:col-span-2 bg-[#242424] py-20 px-40 md:flex flex-col items-center">

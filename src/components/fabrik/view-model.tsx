@@ -68,7 +68,7 @@ const Dinosaur = () => {
       camera.position.setY(0.4);
       camera.position.setX(2);
 
-      const ambientLight = new THREE.AmbientLight(0xcccccc, 1);
+      const ambientLight = new THREE.AmbientLight(0xffffff, 2);
       const gridHelper = new GridHelper(200, 50, 0x444444, 0x444444);
       const cameraHelper = new CameraHelper(camera);
       scene.add(gridHelper);
@@ -76,8 +76,11 @@ const Dinosaur = () => {
       scene.add(ambientLight);
       const controls = new OrbitControls(camera, renderer.domElement);
       controls.autoRotate = true;
+      controls.autoRotateSpeed = 0.8;
+      controls.minDistance = 1;
+      controls.maxDistance = 10;
 
-      loadGLTFModel(scene, "/retail-3D-models/P1.glb", {
+      loadGLTFModel(scene, "/retail-3D-models/P2.glb", {
         receiveShadow: false,
         castShadow: false,
       }).then(() => {
@@ -122,7 +125,7 @@ export default function App() {
       className="min-h-screen relative bg-[#E7F6F2]"
       style={{ width: "100%", margin: "0 auto" }}
     >
-      <div className="absolute z-2 md:py-6 py-10  hover:bg-[#160040] border border-[#160040] cursor-pointer font-700 text-text-white bg-[#4C0070] md:top-100 md:left-70 left-30 top-30 rounded-12 md:px-14 px-18 duration-200 ease-in-out ">
+      <div className="absolute z-2 md:py-6 py-10  hover:bg-[#160040] border border-[#160040] cursor-pointer font-700 text-text-white bg-[#4C0070] md:top-60 md:left-70 left-30 top-30 rounded-12 px-18 duration-200 ease-in-out ">
         X
       </div>
       <Dinosaur />
