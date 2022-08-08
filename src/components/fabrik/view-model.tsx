@@ -12,9 +12,9 @@ function loadGLTFModel(scene: any, glbPath: any, options: any) {
       glbPath,
       (gltf) => {
         const obj = gltf.scene;
-        console.log(obj);
-        obj.name = "dinosaur";
-        obj.position.y = 0;
+        // console.log(obj);
+        obj.name = "model_ans";
+        obj.position.y = 0.6;
         obj.position.x = 0;
         obj.receiveShadow = receiveShadow;
         obj.castShadow = castShadow;
@@ -59,14 +59,16 @@ const Dinosaur = () => {
 
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(
-        25,
+        45,
         window.innerWidth / window.innerHeight,
         0.1,
         1000
       );
       camera.position.setZ(0.02);
-      camera.position.setY(0.4);
-      camera.position.setX(2);
+      camera.position.setY(0.9);
+      camera.position.setX(1);
+      const target = new THREE.Vector3(0, 0.6, 0);
+      // camera.lookAt(target);
 
       const ambientLight = new THREE.AmbientLight(0xffffff, 2);
       const gridHelper = new GridHelper(200, 50, 0x444444, 0x444444);
@@ -79,6 +81,9 @@ const Dinosaur = () => {
       controls.autoRotateSpeed = 0.8;
       controls.minDistance = 1;
       controls.maxDistance = 10;
+      controls.target = target;
+      // console.log(controls);
+      controls.update();
 
       loadGLTFModel(scene, "/retail-3D-models/P2.glb", {
         receiveShadow: false,
