@@ -1,6 +1,6 @@
 import React from "react";
-import Test from "../../components/fabrik/glb/test";
-import ViewModel from "../../components/fabrik/view-model";
+import Test from "../../../../components/fabrik/glb/test";
+import ViewModel from "../../../../components/fabrik/view-model";
 
 const Model = () => {
   return (

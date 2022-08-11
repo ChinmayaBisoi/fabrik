@@ -3,6 +3,8 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { CameraHelper, GridHelper } from "three";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 function loadGLTFModel(scene: any, glbPath: any, options: any) {
   const { receiveShadow, castShadow } = options;
@@ -43,7 +45,22 @@ const Dinosaur = () => {
   const [loading, setLoading] = useState(true);
   const [renderer, setRenderer] = useState();
 
+  const router = useRouter();
+  const { query } = router;
+  console.log(query.name);
+
   useEffect(() => {
+
+    async function fetch() {
+      const { status } = await get3dmodel({ query.name});
+      if (status === 'Processed' || status === 'Processing') {
+       
+        // router.push(MAGIC_LINK_PAGE);
+        return;
+      }
+    }
+    fetch();
+
     const { current: container } = refContainer;
     if (container && !renderer) {
       const renderer: any = new THREE.WebGLRenderer({
@@ -127,12 +144,14 @@ const Dinosaur = () => {
 export default function App() {
   return (
     <div
-      className="min-h-screen relative bg-[#E7F6F2]"
+      className="min-h-screen relative bg-[#F1F1F1]"
       style={{ width: "100%", margin: "0 auto" }}
     >
-      <div className="absolute z-2 md:py-6 py-10  hover:bg-[#160040] border border-[#160040] cursor-pointer font-700 text-text-white bg-[#4C0070] md:top-60 md:left-70 left-30 top-30 rounded-12 px-18 duration-200 ease-in-out ">
-        X
-      </div>
+      <Link href={"/fabrik"}>
+        <div className="absolute z-2 md:py-6 py-10 hover:shadow-6  hover:bg-[#6d3ec6] border border-[#160040] cursor-pointer font-700 text-text-white bg-[#4C0070] md:top-60 md:left-70 left-30 top-30 rounded-12 px-18 duration-200 ease-in-out ">
+          X
+        </div>
+      </Link>
       <Dinosaur />
     </div>
   );

@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const ListItem = ({ item }: { item: any }) => {
   return (
-    <Link href="/fabrik/model">
+    <Link href={`/fabrik/model/${item}`}>
       <div className="py-12 px-20 bg-[#363636] hover:bg-[#515151] rounded-8 flex items-center justify-between cursor-pointer">
         <div className="text-text-white">{item}</div>
         <Image
